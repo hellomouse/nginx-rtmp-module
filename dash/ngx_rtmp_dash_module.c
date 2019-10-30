@@ -2321,6 +2321,13 @@ ngx_rtmp_dash_cleanup_dir(ngx_str_t *ppath, ngx_msec_t playlen)
         {
             max_age = playlen / 500;
 
+        } else if (name.len >= 4 && name.data[name.len - 4] == '.' &&
+                                    name.data[name.len - 3] == 's' &&
+                                    name.data[name.len - 2] == 'e' &&
+                                    name.data[name.len - 1] == 'g')
+        {
+            max_age = playlen / 500;
+
         } else {
             ngx_log_debug1(NGX_LOG_DEBUG_RTMP, ngx_cycle->log, 0,
                            "dash: cleanup skip unknown file type '%V'", &name);
